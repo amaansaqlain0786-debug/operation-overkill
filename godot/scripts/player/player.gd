@@ -31,6 +31,7 @@ var _coyote_timer: float = 0.0
 var _jump_buffer_timer: float = 0.0
 
 func _ready() -> void:
+	add_to_group("player")
 	CameraManager.register_camera(camera)
 	move_speed = operative_data.move_speed if operative_data else default_move_speed
 	gravity = ProjectSettings.get_setting("physics/2d/default_gravity", 980.0) * gravity_multiplier

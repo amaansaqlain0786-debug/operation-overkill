@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy_base.tscn" id="1"]
+[ext_resource type="Resource" path="res://resources/enemies/rifleman_data.tres" id="2"]
+[ext_resource type="Script" path="res://scripts/components/state_machine/state_machine.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/enemies/states/enemy_patrol.gd" id="4"]
+[ext_resource type="Script" path="res://scripts/enemies/states/enemy_chase.gd" id="5"]
+
+[node name="Rifleman" instance=ExtResource("1")]
+enemy_data = ExtResource("2")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3")
+initial_state = NodePath("Patrol")
+
+[node name="Patrol" type="Node" parent="StateMachine"]
+script = ExtResource("4")
+
+[node name="Chase" type="Node" parent="StateMachine"]
+script = ExtResource("5")

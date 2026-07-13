@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1"]
 [ext_resource type="TileSet" path="res://art/tilesets/level_placeholder.tres" id="2_0y8gg"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/rifleman.tscn" id="3_rifleman"]
 
 [node name="LevelBase" type="Node2D" unique_id=1589588224]
 script = ExtResource("1")
@@ -16,6 +17,15 @@ tile_set = ExtResource("2_0y8gg")
 position = Vector2(8, 100)
 
 [node name="Enemies" type="Node2D" parent="." unique_id=631111813]
+
+[node name="Rifleman1" parent="Enemies" instance=ExtResource("3_rifleman")]
+position = Vector2(-72, 128)
+
+[node name="Rifleman2" parent="Enemies" instance=ExtResource("3_rifleman")]
+position = Vector2(88, 80)
+
+[node name="Rifleman3" parent="Enemies" instance=ExtResource("3_rifleman")]
+position = Vector2(250, 144)
 
 [node name="Pickups" type="Node2D" parent="." unique_id=39199125]
 

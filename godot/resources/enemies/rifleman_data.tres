@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/data_types/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+enemy_name = "Rifleman"
+enemy_type = 0
+move_speed = 80.0
+detection_range = 150.0
+patrol_distance = 64.0
+lose_interest_range = 250.0
