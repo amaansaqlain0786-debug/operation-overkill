@@ -40,6 +40,12 @@ func _setup_hud(player_instance: Player) -> void:
 	player_instance.health.health_changed.connect(hud.set_health)
 	hud.set_health(player_instance.health.current_health, player_instance.health.max_health)
 
+	var weapon := player_instance.equipped_weapon
+	if weapon:
+		weapon.ammo_changed.connect(hud.set_ammo)
+		hud.set_ammo(weapon.current_ammo, weapon.magazine_size)
+		hud.set_weapon_name(weapon.weapon_data.weapon_name if weapon.weapon_data else "")
+
 func _on_player_died() -> void:
 	if respawn_delay > 0.0:
 		await get_tree().create_timer(respawn_delay).timeout
