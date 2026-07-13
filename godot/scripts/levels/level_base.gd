@@ -18,6 +18,7 @@ class_name LevelBase
 @onready var pickups: Node2D = $Pickups
 @onready var destructibles: Node2D = $Destructibles
 @onready var triggers: Node2D = $Triggers
+@onready var hud: HUD = $HUD
 
 func _ready() -> void:
 	_spawn_player()
@@ -29,6 +30,11 @@ func _spawn_player() -> void:
 	player_instance.position = player_spawn.position
 	add_child(player_instance)
 	_apply_camera_bounds(player_instance.camera)
+	_setup_hud(player_instance)
+
+func _setup_hud(player_instance: Player) -> void:
+	player_instance.health.health_changed.connect(hud.set_health)
+	hud.set_health(player_instance.health.current_health, player_instance.health.max_health)
 
 func _apply_camera_bounds(camera: Camera2D) -> void:
 	camera.limit_left = camera_limit_left

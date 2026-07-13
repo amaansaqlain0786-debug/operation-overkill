@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cxc6jtodamxak" path="res://scripts/player/states/player_fall.gd" id="7"]
 [ext_resource type="Script" path="res://scripts/components/camera_follow.gd" id="8"]
 [ext_resource type="PackedScene" path="res://scenes/weapons/pistol.tscn" id="9"]
+[ext_resource type="Script" path="res://scripts/components/health.gd" id="10"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
 size = Vector2(16, 32)
@@ -49,3 +50,6 @@ script = ExtResource("7")
 
 [node name="Pistol" parent="." instance=ExtResource("9")]
 position = Vector2(4, -8)
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("10")

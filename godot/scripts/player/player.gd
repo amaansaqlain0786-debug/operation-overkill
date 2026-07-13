@@ -6,6 +6,7 @@ class_name Player
 ## buffer timers so no individual state has to duplicate that logic.
 
 @export var operative_data: OperativeData
+@export var default_max_health: float = 100.0
 @export var debug_movement: bool = false
 
 @export_group("Movement")
@@ -25,6 +26,7 @@ class_name Player
 @onready var state_machine: StateMachine = $StateMachine
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var equipped_weapon: WeaponBase = $Pistol
+@onready var health: Health = $Health
 
 var move_speed: float = 300.0
 var gravity: float = 980.0
@@ -38,10 +40,16 @@ func _ready() -> void:
 	CameraManager.register_camera(camera)
 	move_speed = operative_data.move_speed if operative_data else default_move_speed
 	gravity = ProjectSettings.get_setting("physics/2d/default_gravity", 980.0) * gravity_multiplier
+	health.set_max_health(operative_data.max_health if operative_data else default_max_health)
+	health.died.connect(_on_died)
 	if debug_movement:
 		print("[Player] ready. move_speed=%s gravity=%s state_machine.current_state=%s" % [
 			move_speed, gravity, state_machine.current_state,
 		])
+
+func _on_died() -> void:
+	CameraManager.register_camera(null)
+	queue_free()
 
 func _physics_process(delta: float) -> void:
 	_coyote_timer = coyote_time if is_on_floor() else maxf(_coyote_timer - delta, 0.0)

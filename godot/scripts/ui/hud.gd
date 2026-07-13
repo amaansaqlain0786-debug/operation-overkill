@@ -1,7 +1,9 @@
 extends CanvasLayer
+class_name HUD
 
-## Public API surface for gameplay to push UI updates through. No combat,
-## ammo or objective systems exist yet, so these just update the visuals.
+## Public API surface for gameplay to push UI updates through. Ammo/objective
+## systems don't exist yet, so those two just update the visuals; set_health
+## is meant to be connected directly to a Health node's health_changed signal.
 
 @onready var _health_bar: ProgressBar = %HealthBar
 @onready var _ammo_label: Label = %AmmoLabel

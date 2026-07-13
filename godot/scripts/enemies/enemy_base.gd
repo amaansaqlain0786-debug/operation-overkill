@@ -9,6 +9,8 @@ class_name EnemyBase
 @export var enemy_data: EnemyData
 
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var health: Health = $Health
+@onready var contact_damage: ContactDamage = $ContactDamage
 
 var gravity: float = 980.0
 var facing_direction: float = 1.0
@@ -17,6 +19,12 @@ var patrol_origin: Vector2
 func _ready() -> void:
 	gravity = ProjectSettings.get_setting("physics/2d/default_gravity", 980.0)
 	patrol_origin = global_position
+	health.set_max_health(enemy_data.max_health if enemy_data else 50.0)
+	health.died.connect(_on_died)
+	contact_damage.damage = enemy_data.damage if enemy_data else 10.0
+
+func _on_died() -> void:
+	queue_free()
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
