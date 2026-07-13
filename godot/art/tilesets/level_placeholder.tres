@@ -1,0 +1,33 @@
+[gd_resource type="TileSet" format=3]
+
+[sub_resource type="Gradient" id="Gradient_wx5sk"]
+colors = PackedColorArray(0.2, 0.55, 0.2, 1, 0.2, 0.55, 0.2, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0wll1"]
+gradient = SubResource("Gradient_wx5sk")
+width = 16
+height = 16
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kg3co"]
+texture = SubResource("GradientTexture2D_0wll1")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="Gradient" id="Gradient_mw12n"]
+colors = PackedColorArray(0.55, 0.4, 0.25, 1, 0.55, 0.4, 0.25, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_x7l7n"]
+gradient = SubResource("Gradient_mw12n")
+width = 16
+height = 16
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rxlj7"]
+texture = SubResource("GradientTexture2D_x7l7n")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[resource]
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
+sources/0 = SubResource("TileSetAtlasSource_kg3co")
+sources/1 = SubResource("TileSetAtlasSource_rxlj7")
