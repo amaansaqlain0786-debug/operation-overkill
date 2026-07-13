@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://c5g75x55wxemi" path="res://scripts/player/states/player_run.gd" id="5"]
 [ext_resource type="Script" uid="uid://g00h62g05fru" path="res://scripts/player/states/player_jump.gd" id="6"]
 [ext_resource type="Script" uid="uid://cxc6jtodamxak" path="res://scripts/player/states/player_fall.gd" id="7"]
+[ext_resource type="Script" path="res://scripts/components/camera_follow.gd" id="8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
 size = Vector2(16, 32)
@@ -27,6 +28,7 @@ shape = SubResource("RectangleShape2D_1")
 position = Vector2(8, -8)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1694422035]
+script = ExtResource("8")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1334204966]
 script = ExtResource("3")

@@ -12,9 +12,9 @@ config_version=5
 
 config/name="Operation Overkill"
 config/version="0.1.0"
-config/features=PackedStringArray("4.7", "Compatibility")
-config/icon="res://icon.svg"
 run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("4.7")
+config/icon="res://icon.svg"
 
 [audio]
 
@@ -36,7 +36,6 @@ window/size/viewport_height=360
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="viewport"
-window/stretch/aspect="keep"
 
 [input]
 
@@ -171,7 +170,7 @@ pause={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-2d/snap_2d_transforms_to_pixel=true
-2d/snap_2d_vertices_to_pixel=true
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+2d/snap_2d_transforms_to_pixel=true
+2d/snap_2d_vertices_to_pixel=true
