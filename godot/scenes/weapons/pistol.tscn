@@ -1,0 +1,16 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/weapons/weapon_base.tscn" id="1"]
+[ext_resource type="Script" path="res://scripts/weapons/pistol.gd" id="2"]
+[ext_resource type="Resource" path="res://resources/weapons/pistol_data.tres" id="3"]
+[ext_resource type="Script" path="res://scripts/utils/object_pool.gd" id="4"]
+[ext_resource type="PackedScene" path="res://scenes/weapons/bullet.tscn" id="5"]
+
+[node name="Pistol" instance=ExtResource("1")]
+script = ExtResource("2")
+weapon_data = ExtResource("3")
+
+[node name="BulletPool" type="Node" parent="."]
+script = ExtResource("4")
+scene = ExtResource("5")
+prewarm_count = 16

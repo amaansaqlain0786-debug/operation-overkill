@@ -23,9 +23,12 @@ class_name Player
 
 @onready var camera: Camera2D = $Camera2D
 @onready var state_machine: StateMachine = $StateMachine
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var equipped_weapon: WeaponBase = $Pistol
 
 var move_speed: float = 300.0
 var gravity: float = 980.0
+var facing_direction: float = 1.0
 
 var _coyote_timer: float = 0.0
 var _jump_buffer_timer: float = 0.0
@@ -43,6 +46,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	_coyote_timer = coyote_time if is_on_floor() else maxf(_coyote_timer - delta, 0.0)
 	_jump_buffer_timer = maxf(_jump_buffer_timer - delta, 0.0)
+	if Input.is_action_pressed("fire") and equipped_weapon:
+		equipped_weapon.fire()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
@@ -68,5 +73,12 @@ func apply_horizontal_movement(delta: float, control_multiplier: float = 1.0) ->
 	var direction := get_move_input()
 	if direction != 0.0:
 		velocity.x = move_toward(velocity.x, direction * move_speed, acceleration * control_multiplier * delta)
+		set_facing(direction)
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, friction * control_multiplier * delta)
+
+func set_facing(direction: float) -> void:
+	facing_direction = signf(direction)
+	sprite.flip_h = facing_direction < 0.0
+	if equipped_weapon:
+		equipped_weapon.scale.x = facing_direction
