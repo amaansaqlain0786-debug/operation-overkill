@@ -16,11 +16,15 @@ func _ready() -> void:
 		if child is State:
 			_states[child.name.to_lower()] = child
 			child.transitioned.connect(transition_to)
+	if _states.is_empty():
+		push_warning("StateMachine at %s has no State children — no states will ever run." % get_path())
 	if initial_state != NodePath():
 		var start_state := get_node(initial_state) as State
 		if start_state:
 			current_state = start_state
 			current_state.enter(&"")
+	if current_state == null:
+		push_error("StateMachine at %s never resolved a current_state (initial_state=%s) — it will not process anything. Check that Initial State is set in the Inspector and points to a valid State child." % [get_path(), initial_state])
 
 func _process(delta: float) -> void:
 	if current_state:
