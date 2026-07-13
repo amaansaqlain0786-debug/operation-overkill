@@ -42,8 +42,13 @@ func set_facing(direction: float) -> void:
 	sprite.flip_h = facing_direction < 0.0
 
 func get_player() -> Player:
-	var players := get_tree().get_nodes_in_group("player")
-	return players[0] as Player if not players.is_empty() else null
+	# On respawn, the dying player can still be in the group for one frame
+	# (queue_free defers removal) alongside the freshly spawned one — skip
+	# anything already queued for deletion so enemies latch onto the new one.
+	for candidate in get_tree().get_nodes_in_group("player"):
+		if not candidate.is_queued_for_deletion():
+			return candidate as Player
+	return null
 
 func distance_to_player() -> float:
 	var player := get_player()

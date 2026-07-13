@@ -13,6 +13,9 @@ class_name LevelBase
 @export var camera_limit_right: int = 550
 @export var camera_limit_bottom: int = 300
 
+@export_group("Respawn")
+@export var respawn_delay: float = 0.0
+
 @onready var player_spawn: Marker2D = $PlayerSpawn
 @onready var enemies: Node2D = $Enemies
 @onready var pickups: Node2D = $Pickups
@@ -31,10 +34,16 @@ func _spawn_player() -> void:
 	add_child(player_instance)
 	_apply_camera_bounds(player_instance.camera)
 	_setup_hud(player_instance)
+	player_instance.health.died.connect(_on_player_died)
 
 func _setup_hud(player_instance: Player) -> void:
 	player_instance.health.health_changed.connect(hud.set_health)
 	hud.set_health(player_instance.health.current_health, player_instance.health.max_health)
+
+func _on_player_died() -> void:
+	if respawn_delay > 0.0:
+		await get_tree().create_timer(respawn_delay).timeout
+	_spawn_player()
 
 func _apply_camera_bounds(camera: Camera2D) -> void:
 	camera.limit_left = camera_limit_left
