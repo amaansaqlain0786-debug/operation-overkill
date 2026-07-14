@@ -4,6 +4,7 @@
 [ext_resource type="TileSet" path="res://art/tilesets/level_placeholder.tres" id="2_0y8gg"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/rifleman.tscn" id="3_rifleman"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="4_hud"]
+[ext_resource type="PackedScene" path="res://scenes/levels/extraction_zone.tscn" id="5_extraction"]
 
 [node name="LevelBase" type="Node2D" unique_id=1589588224]
 script = ExtResource("1")
@@ -33,5 +34,8 @@ position = Vector2(250, 144)
 [node name="Destructibles" type="Node2D" parent="." unique_id=626509890]
 
 [node name="Triggers" type="Node2D" parent="." unique_id=1041235458]
+
+[node name="ExtractionZone" parent="Triggers" instance=ExtResource("5_extraction")]
+position = Vector2(460, 140)
 
 [node name="HUD" parent="." instance=ExtResource("4_hud")]

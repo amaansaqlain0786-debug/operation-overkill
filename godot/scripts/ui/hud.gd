@@ -10,6 +10,8 @@ class_name HUD
 @onready var _ammo_label: Label = %AmmoLabel
 @onready var _weapon_name_label: Label = %WeaponNameLabel
 @onready var _objective_label: Label = %ObjectiveLabel
+@onready var _lives_label: Label = %LivesLabel
+@onready var _end_message_label: Label = %EndMessageLabel
 
 func set_health(current: float, max_value: float) -> void:
 	_health_bar.max_value = max_value
@@ -23,3 +25,10 @@ func set_weapon_name(weapon_name: String) -> void:
 
 func set_objective(text: String) -> void:
 	_objective_label.text = text
+
+func set_lives(count: int) -> void:
+	_lives_label.text = "Lives: %d" % count
+
+func show_end_message(text: String) -> void:
+	_end_message_label.text = text
+	_end_message_label.visible = true
