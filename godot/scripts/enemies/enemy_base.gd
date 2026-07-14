@@ -7,6 +7,7 @@ class_name EnemyBase
 ## specific enemy's decision logic, only what its states call into.
 
 @export var enemy_data: EnemyData
+@export var hit_flash_duration: float = 0.1
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var health: Health = $Health
@@ -21,10 +22,16 @@ func _ready() -> void:
 	patrol_origin = global_position
 	health.set_max_health(enemy_data.max_health if enemy_data else 50.0)
 	health.died.connect(_on_died)
+	health.damaged.connect(_on_damaged)
 	contact_damage.damage = enemy_data.damage if enemy_data else 10.0
 
 func _on_died() -> void:
 	queue_free()
+
+func _on_damaged(_amount: float) -> void:
+	sprite.modulate = Color(3.0, 3.0, 3.0, 1.0)
+	var tween := create_tween()
+	tween.tween_property(sprite, "modulate", Color(1.0, 1.0, 1.0, 1.0), hit_flash_duration)
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():

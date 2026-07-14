@@ -10,6 +10,9 @@
 [ext_resource type="Script" path="res://scripts/components/camera_follow.gd" id="8"]
 [ext_resource type="PackedScene" path="res://scenes/weapons/pistol.tscn" id="9"]
 [ext_resource type="Script" path="res://scripts/components/health.gd" id="10"]
+[ext_resource type="AudioStreamWAV" path="res://audio/sfx/hit.tres" id="11"]
+[ext_resource type="AudioStreamWAV" path="res://audio/sfx/death.tres" id="12"]
+[ext_resource type="AudioStreamWAV" path="res://audio/sfx/jump.tres" id="13"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
 size = Vector2(16, 32)
@@ -44,6 +47,7 @@ script = ExtResource("5")
 
 [node name="Jump" type="Node" parent="StateMachine" unique_id=1689079152]
 script = ExtResource("6")
+jump_sound = ExtResource("13")
 
 [node name="Fall" type="Node" parent="StateMachine" unique_id=575468183]
 script = ExtResource("7")
@@ -53,3 +57,5 @@ position = Vector2(4, -8)
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("10")
+hit_sound = ExtResource("11")
+death_sound = ExtResource("12")

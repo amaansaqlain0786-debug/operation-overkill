@@ -9,6 +9,8 @@ class_name WeaponBase
 signal ammo_changed(current: int, max_value: int)
 
 @export var weapon_data: WeaponData
+@export var fire_shake_amount: float = 0.08
+@export var recoil_speed: float = 120.0
 
 @onready var muzzle_point: Marker2D = $MuzzlePoint
 
